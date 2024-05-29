@@ -18,6 +18,4 @@ const movieSchema: Schema = new Schema({
   scheduledAt: { type: Date }
 })
 
-const Movie = mongoose.model<IMovie>('Movie', movieSchema)
-
-export default Movie
+export const Movie = mongoose.model<IMovie>('Movie', movieSchema)

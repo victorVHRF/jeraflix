@@ -1,5 +1,5 @@
 import axios from 'axios'
-import Movie from '../models/movieModel'
+import { Movie } from '../models/movieModel'
 
 export async function searchMoviesService(query: string){
   const { data } = await axios.get(`https://api.themoviedb.org/3/search/movie`, {
