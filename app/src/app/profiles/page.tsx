@@ -1,18 +1,15 @@
 "use client"
 
 import { Profile } from "@/types/profile.interface";
-
-
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getProfiles } from "../../../services/api";
+import { createProfile, getProfiles } from "../../../services/api";
 
 export default function Profiles() {
-  const [profiles, setProfiles] = useState<Profile[]>([])
-  const [loading, setLoading] = useState(true)
-  const router = useRouter()
-  // const {profiles, error} = useProfiles()
-  // const [profiles, setProfiles] = useState<ProfilesProps[]>([]);
+  const [profiles, setProfiles] = useState<Profile[]>([]);
+  const [newProfileName, setNewProfileName] = useState("");
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchProfiles = async () => {
@@ -35,6 +32,22 @@ export default function Profiles() {
     fetchProfiles();
   }, [router]);
 
+  async function handleCreateProfile () {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      router.push('/login');
+      return;
+    }
+
+    try {
+      const newProfile = await createProfile(token, newProfileName);
+      setProfiles([...profiles, newProfile]);
+      setNewProfileName("");
+    } catch (error) {
+      console.error('Failed to create profile:', error);
+    }
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -47,13 +60,24 @@ export default function Profiles() {
           {profiles.map((profile) => (
             <li key={profile._id} className="mb-4 border-b pb-2">
               <div className="text-lg">{profile.name}</div>
-              <div className="text-sm text-gray-600">{profile.name}</div>
             </li>
           ))}
         </ul>
       ) : (
         <p>No profiles found.</p>
       )}
+      <div className="mt-6">
+        <input
+          type="text"
+          value={newProfileName}
+          onChange={(e) => setNewProfileName(e.target.value)}
+          placeholder="New profile name"
+          className="w-full border border-gray-300 p-2 rounded mb-2 text-black"
+        />
+        <button onClick={handleCreateProfile} className="w-full bg-blue-600 text-white p-2 rounded">
+          Create Profile
+        </button>
+      </div>
     </div>
-  )
+  );
 }
