@@ -52,6 +52,10 @@ export default function Profiles() {
     return <div>Loading...</div>;
   }
 
+  const handleEnterProfile = (userId: string) => {
+    router.push(`/profilePage`);
+  };
+
   return (
     <div className="max-w-md mx-auto p-8 rounded shadow-md">
       <h2 className="text-2xl mb-6 text-center">Profiles</h2>
@@ -59,7 +63,10 @@ export default function Profiles() {
         <ul>
           {profiles.map((profile) => (
             <li key={profile._id} className="mb-4 border-b pb-2">
-              <div className="text-lg">{profile.name}</div>
+              <div className="text-lg">
+                {profile.name}
+                <button onClick={() => handleEnterProfile(profile._id)}>Enter</button>
+              </div>
             </li>
           ))}
         </ul>

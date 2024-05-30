@@ -1,3 +1,4 @@
+import { Movie } from "../models/movieModel"
 import { Profile } from "../models/profileModel"
 
 export async function createProfileService (userId: string, name: string) {
@@ -15,4 +16,8 @@ export async function createProfileService (userId: string, name: string) {
 export async function listProfilesService(userId: string){
   const profiles = await Profile.find({userId})
   return profiles
+}
+
+export async function getProfileMoviesService(userId: string) {
+  return await Movie.find({ userId });
 }

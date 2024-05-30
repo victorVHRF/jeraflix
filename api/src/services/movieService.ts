@@ -33,3 +33,13 @@ export async function markAsWatchedService(movieId: string){
   await movie.save()
   return movie
 }
+
+export async function getTopRatedMoviesService(){
+  const { data } = await axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.TMDB_API_KEY}`, {
+    params: {
+      api_key: process.env.TMDB_API_KEY
+    }
+  })
+
+  return data.results
+}

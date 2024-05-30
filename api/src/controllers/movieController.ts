@@ -1,5 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { addMovieToWatchListService, listWatchService, markAsWatchedService, searchMoviesService } from "../services/movieService";
+import { addMovieToWatchListService, getTopRatedMoviesService, listWatchService, markAsWatchedService, searchMoviesService } from "../services/movieService";
 
 export async function searchMovies (request: FastifyRequest, reply: FastifyReply) {
   const { query } = request.query as any
@@ -42,5 +42,14 @@ export async function markAsWatched(request: FastifyRequest, reply: FastifyReply
     reply.send(movie)
   } catch (error: any) {
     reply.status(400).send({ message: error.message })
+  }
+}
+
+export async function getTopRatedMovies(request: FastifyRequest, reply: FastifyReply) {
+  try {
+    const movies = await getTopRatedMoviesService()
+    reply.send(movies)
+  } catch (error: any) {
+    reply.status(400).send({ message: error.message });
   }
 }

@@ -31,3 +31,13 @@ export const createProfile = async (token: string, name: string) => {
   })
   return response.data
 }
+
+export const getProfileMovies = async () => {
+  const token = localStorage.getItem('token');
+  const response = await api.get(`/movies/top-rated?apikey=${process.env.TMDB_API_KEY}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+};
