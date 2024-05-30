@@ -1,4 +1,4 @@
-import { Profile } from "../../models/profileModel";
+import { Profile } from "../models/profileModel"
 
 export async function createProfileService (userId: string, name: string) {
   const profiles = await Profile.find({userId})
@@ -10,4 +10,9 @@ export async function createProfileService (userId: string, name: string) {
   const profile = new Profile({userId, name})
   await profile.save()
   return profile
+}
+
+export async function listProfilesService(userId: string){
+  const profiles = await Profile.find({userId})
+  return profiles
 }

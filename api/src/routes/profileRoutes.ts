@@ -1,8 +1,8 @@
 import { FastifyInstance } from "fastify";
-import { createProfileController } from "../controllers/profileController/createProfileController";
+import { createProfile, listProfiles } from "../controllers/profileController";
 
 
 export async function profileRoutes(app: FastifyInstance) {
-  app.post('/profiles', createProfileController)
-  
+  app.post('/profiles', createProfile)
+  app.get('/profiles/:userId', listProfiles)
 }

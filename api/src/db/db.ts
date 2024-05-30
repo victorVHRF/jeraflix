@@ -5,7 +5,7 @@ dotenv.config()
 
 export async function connectDB() {
   try {
-    await mongoose.connect(process.env.DB_URL!, {
+    await mongoose.connect(process.env.DATABASE!, {
       useNewUrlParser: true,
       useUnifiedTopology: true
     })
