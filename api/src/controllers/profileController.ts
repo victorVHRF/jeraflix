@@ -2,7 +2,8 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import { createProfileService, listProfilesService } from "../services/profileService";
 
 export async function createProfile (request: FastifyRequest, reply: FastifyReply){
-  const { userId, name } = request.body as any
+  const { userId } = request.user as any
+  const { name } = request.body as any
 
   try {
     const profile = await createProfileService(userId, name)
