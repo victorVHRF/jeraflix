@@ -1,16 +1,14 @@
 import fastifyCors from '@fastify/cors';
+import fastifyJwt from '@fastify/jwt';
 import fastify from 'fastify';
 import { connectDB } from './db/db';
 import { authRoutes } from './routes/authRoutes';
 import { movieRoutes } from './routes/movieRoutes';
 import { profileRoutes } from './routes/profileRoutes';
 
-
-// dotenv.config();
-
 const app = fastify()
 app.register(fastifyCors, { origin: true })
-// app.register(fastifyJwt, { secret: process.env.JWT_SECRET })
+app.register(fastifyJwt, { secret: process.env.JWT_SECRET! })
 
 app.register(authRoutes)
 app.register(profileRoutes)

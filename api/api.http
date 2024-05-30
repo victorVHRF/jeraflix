@@ -1,1 +1,9 @@
 GET http://localhost:3333/
+
+###
+# CRIA PROFILE
+GET http://localhost:3333/profiles/507f1f77bcf86cd799439011
+
+###
+# BUSCA FILME Inception
+GET http://localhost:3333/movies/search?query=Inception
