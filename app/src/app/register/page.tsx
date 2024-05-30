@@ -1,6 +1,8 @@
 "use client"
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { registerUser } from "../../../services/api";
 
 interface RegisterProps {
 
@@ -11,10 +13,16 @@ export default function Register(props: RegisterProps) {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [birthDate, setBirthDate] = useState('');
+  const router = useRouter()
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    // Lógica de registro
+    try {
+      await registerUser(email, password, name, birthDate);
+      router.push('/login');
+    } catch (error) {
+      console.error('Registration failed:', error);
+    }
   };
 
   return (
@@ -25,7 +33,7 @@ export default function Register(props: RegisterProps) {
           <label className="block mb-1">Name</label>
           <input
             type="text"
-            className="w-full border border-gray-300 p-2 rounded"
+            className="w-full border border-gray-300 p-2 rounded text-black"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
@@ -35,7 +43,7 @@ export default function Register(props: RegisterProps) {
           <label className="block mb-1">Email</label>
           <input
             type="email"
-            className="w-full border border-gray-300 p-2 rounded"
+            className="w-full border border-gray-300 p-2 rounded text-black"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -45,7 +53,7 @@ export default function Register(props: RegisterProps) {
           <label className="block mb-1">Password</label>
           <input
             type="password"
-            className="w-full border border-gray-300 p-2 rounded"
+            className="w-full border border-gray-300 p-2 rounded text-black"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -55,7 +63,7 @@ export default function Register(props: RegisterProps) {
           <label className="block mb-1">Birth Date</label>
           <input
             type="date"
-            className="w-full border border-gray-300 p-2 rounded"
+            className="w-full border border-gray-300 p-2 rounded text-black"
             value={birthDate}
             onChange={(e) => setBirthDate(e.target.value)}
             required

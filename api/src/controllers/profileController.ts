@@ -13,7 +13,7 @@ export async function createProfile (request: FastifyRequest, reply: FastifyRepl
 }
 
 export async function listProfiles(request: FastifyRequest, reply: FastifyReply){
-  const { userId } = request.params as any
+  const { userId } = request.user as any
 
   try {
     const profiles = await listProfilesService(userId)

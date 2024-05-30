@@ -7,3 +7,15 @@ GET http://localhost:3333/profiles/507f1f77bcf86cd799439011
 ###
 # BUSCA FILME Inception
 GET http://localhost:3333/movies/search?query=Inception
+
+###
+
+POST http://localhost:3333/register
+Content-Type: application/json
+
+{
+    "email": "fulano@email.com",
+    "password": "123456",
+    "name": "fulano",
+    "birthDate": "1994-12-12"
+}
