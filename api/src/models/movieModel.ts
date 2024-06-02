@@ -14,7 +14,7 @@ const movieSchema: Schema = new Schema({
   movieId: { type: Number, required: true },
   title: { type: String, required: true },
   watched: { type: Boolean, default: false },
-  watchlist: { type: Boolean, default: false },
+  watchlist: { type: Boolean, default: true },
   scheduledAt: { type: Date }
 })
 

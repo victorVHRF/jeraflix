@@ -13,10 +13,10 @@ export async function searchMovies (request: FastifyRequest, reply: FastifyReply
 }
 
 export async function addMovieToWatchList(request: FastifyRequest, reply: FastifyReply) {
-  const { profileId, movieid, title} = request.body as any
+  const { profileId, movieId, title} = request.body as any
 
   try {
-    const movie = await addMovieToWatchListService(profileId, movieid, title)
+    const movie = await addMovieToWatchListService(profileId, movieId, title)
      reply.send(movie)
   } catch (error: any) {
     reply.status(400).send({ message: error.message })
@@ -24,7 +24,7 @@ export async function addMovieToWatchList(request: FastifyRequest, reply: Fastif
 }
 
 export async function listWatch(request: FastifyRequest, reply: FastifyReply) {
-  const { profileId } = request.params as any
+  const { profileId } = request.params as {profileId: string}
 
   try {
     const movies = await listWatchService(profileId)

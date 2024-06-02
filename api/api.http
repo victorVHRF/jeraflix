@@ -9,13 +9,102 @@ GET http://localhost:3333/profiles/507f1f77bcf86cd799439011
 GET http://localhost:3333/movies/search?query=Inception
 
 ###
-
+#Registar usuario
 POST http://localhost:3333/register
 Content-Type: application/json
 
 {
-    "email": "fulano@email.com",
-    "password": "123456",
-    "name": "fulano",
-    "birthDate": "1994-12-12"
+  "email": "email@email.com",
+  "password": "123456",
+  "name": "fulano",
+  "birthDate": "2000-01-01"
 }
+
+###
+
+#Fazer Login
+POST http://localhost:3333/login
+Content-Type: application/json
+
+{
+  "email": "email@email.com",
+  "password": "123456"
+}
+
+###
+
+POST http://localhost:3333/social-login
+Content-Type: application/json
+
+{
+  "facebookId": "user_facebook_id",
+  "accessToken": "user_facebook_access_token"
+}
+
+###
+
+#Buscar Filmes Top-Rated
+GET http://localhost:3333/movies/top-rated
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjU4OTNiYWQ2MDBkOGYxNDEwOTQ1M2IiLCJpYXQiOjE3MTcyNzgyMzN9.Lo3NVbdfDeHUEfEjcavEypQcefH-cWHqXoEu7gWhqCs
+
+###
+
+#Buscar Filmes:
+GET http://localhost:3333/movies/search?query=Godfather
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjU4OTNiYWQ2MDBkOGYxNDEwOTQ1M2IiLCJpYXQiOjE3MTcyNzgyMzN9.Lo3NVbdfDeHUEfEjcavEypQcefH-cWHqXoEu7gWhqCs
+
+###
+
+#Adicionar Filme à Watchlist
+POST http://localhost:3333/movies/watchlist
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjU4OTNiYWQ2MDBkOGYxNDEwOTQ1M2IiLCJpYXQiOjE3MTcyNzgyMzN9.Lo3NVbdfDeHUEfEjcavEypQcefH-cWHqXoEu7gWhqCs
+# watchlist retornando false
+
+{
+  "profileId": "665893bad600d8f14109453b",
+  "movieId": 755450,
+  "title": "Godfather"
+}
+
+###
+
+#Listar Filmes na Watchlist
+GET http://localhost:3333/movies/watchlist/665893bad600d8f14109453b
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjU4OTNiYWQ2MDBkOGYxNDEwOTQ1M2IiLCJpYXQiOjE3MTcyNzgyMzN9.Lo3NVbdfDeHUEfEjcavEypQcefH-cWHqXoEu7gWhqCs
+#vazio
+
+###
+
+#Marcar Filme como Assistido
+
+POST http://localhost:3333/movies/watched
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjU4OTNiYWQ2MDBkOGYxNDEwOTQ1M2IiLCJpYXQiOjE3MTcyNzgyMzN9.Lo3NVbdfDeHUEfEjcavEypQcefH-cWHqXoEu7gWhqCs
+
+{
+    "movieId": "665b984b89361d4f4cd6d357"
+}
+
+###
+
+#Adicionar Perfil
+POST http://localhost:3333/profiles
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjU4OTNiYWQ2MDBkOGYxNDEwOTQ1M2IiLCJpYXQiOjE3MTcyNzgyMzN9.Lo3NVbdfDeHUEfEjcavEypQcefH-cWHqXoEu7gWhqCs
+
+{
+  "name": "Adulto"
+}
+
+###
+
+#Listar Perfis
+GET http://localhost:3333/profiles
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjU4OTNiYWQ2MDBkOGYxNDEwOTQ1M2IiLCJpYXQiOjE3MTcyNzgyMzN9.Lo3NVbdfDeHUEfEjcavEypQcefH-cWHqXoEu7gWhqCs
+
+###
+
+#Obter Filmes de um Perfil
+GET http://localhost:3333/profiles/665893bad600d8f14109453b/movies
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjU4OTNiYWQ2MDBkOGYxNDEwOTQ1M2IiLCJpYXQiOjE3MTcyNzgyMzN9.Lo3NVbdfDeHUEfEjcavEypQcefH-cWHqXoEu7gWhqCs

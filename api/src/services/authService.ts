@@ -30,14 +30,11 @@ export async function loginUserService(email: string, password: string){
   return token
 }
 
-export async function socialLoginUser(facebookId: string, name: string, email: string, birthDate: Date){
+export async function socialLoginService({ facebookId, accessToken }: any) {
   let user = await User.findOne({ facebookId })
-
-  if(!user){
-    user = new User({ facebookId, name, email, birthDate })
+  if (!user) {
+    user = new User({ facebookId, name: 'Facebook User' })
     await user.save()
   }
-
-  const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET!)
-  return token
+  return jwt.sign({ userId: user._id }, process.env.JWT_SECRET!, { expiresIn: '1h' })
 }

@@ -5,7 +5,7 @@ interface IUser extends Document {
   password: string
   name: string
   birthDate: Date
-  facebookId?: string
+  // facebookId?: string
 }
 
 const userSchema: Schema = new Schema({
@@ -13,7 +13,7 @@ const userSchema: Schema = new Schema({
   password: { type: String, required: true },
   name: { type: String, required: true },
   birthDate: { type: Date, required: true },
-  facebookId: { type: String, unique: true }
+  // facebookId: { type: String, unique: true }
 })
 
 export const User = mongoose.model<IUser>('User', userSchema)
