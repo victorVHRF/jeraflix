@@ -24,9 +24,13 @@ export async function login(request: FastifyRequest, reply: FastifyReply){
 }
 
 export async function socialLogin(request: FastifyRequest, reply: FastifyReply) {
-  const { facebookId, accessToken } = request.body as any
+  const { facebookId, accessToken, email, name } = request.body as any
+  
   try {
-    const token = await socialLoginService({ facebookId, accessToken })
+    if (!facebookId) {
+      throw new Error('Facebook ID is required')
+    }
+    const token = await socialLoginService({ facebookId, accessToken, email, name })
     reply.send({ token })
   } catch (error: any) {
     reply.status(400).send({ message: error.message })

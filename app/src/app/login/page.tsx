@@ -17,6 +17,7 @@ export default function Login() {
       router.push('/profiles')
     } catch (error) {
       console.error('Login failed:', error)
+      alert('Login failed')
     }
   }
 

@@ -32,7 +32,7 @@ export default function Profiles() {
     fetchProfiles();
   }, [router]);
 
-  async function handleCreateProfile () {
+  async function handleCreateProfile() {
     const token = localStorage.getItem('token');
     if (!token) {
       router.push('/login');
@@ -52,8 +52,8 @@ export default function Profiles() {
     return <div>Loading...</div>;
   }
 
-  const handleEnterProfile = (userId: string) => {
-    router.push(`/profilePage`);
+  const handleEnterProfile = (profileId: string) => {
+    router.push(`/profilePage/${profileId}`);
   };
 
   return (
@@ -63,7 +63,7 @@ export default function Profiles() {
         <ul>
           {profiles.map((profile) => (
             <li key={profile._id} className="mb-4 border-b pb-2">
-              <div className="text-lg">
+              <div className="text-lg flex justify-between">
                 {profile.name}
                 <button onClick={() => handleEnterProfile(profile._id)}>Enter</button>
               </div>

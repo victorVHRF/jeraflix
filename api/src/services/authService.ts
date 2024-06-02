@@ -9,8 +9,8 @@ export async function registerUserService(email: string, password: string, name:
     throw new Error('Usuario já está em uso.')
   }
 
-  const hasedhPassword = await bcrypt.hash(password, 10)
-  const user = new User({ email, password: hasedhPassword, name, birthDate })
+  const hashedPassword = await bcrypt.hash(password, 10)
+  const user = new User({ email, password: hashedPassword, name, birthDate })
   await user.save()
   return user
 }
@@ -30,11 +30,21 @@ export async function loginUserService(email: string, password: string){
   return token
 }
 
-export async function socialLoginService({ facebookId, accessToken }: any) {
+export async function socialLoginService({ facebookId, accessToken, email, name }: SocialLoginParams) {
   let user = await User.findOne({ facebookId })
+
   if (!user) {
-    user = new User({ facebookId, name: 'Facebook User' })
+    if (!email) {
+      throw new Error('Email is required for new users')
+    }
+    user = new User({ facebookId, email, name })
     await user.save()
+  } else {
+    if (user.facebookId !== facebookId) {
+      user.facebookId = facebookId
+      await user.save()
+    }
   }
+
   return jwt.sign({ userId: user._id }, process.env.JWT_SECRET!, { expiresIn: '1h' })
 }

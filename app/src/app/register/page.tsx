@@ -19,9 +19,11 @@ export default function Register(props: RegisterProps) {
     event.preventDefault();
     try {
       await registerUser(email, password, name, birthDate);
+      alert('Registration successful!');
       router.push('/login');
     } catch (error) {
       console.error('Registration failed:', error);
+      alert('Registration failed. Please try again.');
     }
   };
 

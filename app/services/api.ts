@@ -32,12 +32,50 @@ export const createProfile = async (token: string, name: string) => {
   return response.data
 }
 
-export const getProfileMovies = async () => {
-  const token = localStorage.getItem('token');
-  const response = await api.get(`/movies/top-rated?apikey=${process.env.TMDB_API_KEY}`, {
+export const getProfileMovies = async (profileId: string) => {
+  const token = localStorage.getItem('token')
+  const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/profiles/${profileId}/movies`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  });
-  return response.data;
-};
+  })
+  return response.data
+}
+
+export async function markMovieAsWatched(profileId: string, movieId: string, title: string) {
+  const token = localStorage.getItem('token')
+  const response = await axios.post(
+    `${process.env.NEXT_PUBLIC_API_URL}/movies/watched`,
+    { profileId, movieId, title },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+  )
+  return response.data
+}
+
+export async function addMovieToWatchlist(profileId: string, movieId: string, title: string) {
+  const token = localStorage.getItem('token')
+  const response = await axios.post(
+    `${process.env.NEXT_PUBLIC_API_URL}/movies/watchlist`,
+    { profileId, movieId, title },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+  )
+  return response.data
+}
+
+export async function getTopRatedMovies () {
+  const token = localStorage.getItem('token')
+  const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/movies/top-rated`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+  return response.data
+}

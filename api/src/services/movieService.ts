@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { ObjectId } from 'mongodb'
 import { Movie } from '../models/movieModel'
 
 export async function searchMoviesService(query: string){
@@ -12,8 +13,21 @@ export async function searchMoviesService(query: string){
   return data.results
 }
 
-export async function addMovieToWatchListService(profileId: string, movieId: string, title: string){
-  const movie = new Movie({ profileId, movieId, title, watchList: true })
+export async function addMovieToWatchlistService(profileId: string, movieId: string, title: string) {
+  let movie = await Movie.findOne({ profileId: new ObjectId(profileId), movieId })
+
+  if (!movie) {
+    movie = new Movie({
+      profileId: new ObjectId(profileId),
+      movieId,
+      title,
+      watched: false,
+      watchlist: true
+    })
+  } else {
+    movie.watchlist = true
+  }
+
   await movie.save()
   return movie
 }
@@ -23,13 +37,21 @@ export async function listWatchService(profileId: string){
   return movies
 }
 
-export async function markAsWatchedService(movieId: string){
-  const movie = await Movie.findById(movieId)
-  if(!movie){
-    throw new Error('Movie not found')
+export async function markAsWatchedService(profileId: string, movieId: string, title: string) {
+  let movie = await Movie.findOne({ profileId: new ObjectId(profileId), movieId })
+
+  if (!movie) {
+    movie = new Movie({
+      profileId: new ObjectId(profileId),
+      movieId,
+      title,
+      watched: true,
+      watchList: false
+    })
+  } else {
+    movie.watched = true
   }
 
-  movie.watched = true
   await movie.save()
   return movie
 }

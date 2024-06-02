@@ -14,9 +14,9 @@ POST http://localhost:3333/register
 Content-Type: application/json
 
 {
-  "email": "email@email.com",
-  "password": "123456",
-  "name": "fulano",
+  "email": "teste@email.com",
+  "password": "123",
+  "name": "teste",
   "birthDate": "2000-01-01"
 }
 
@@ -45,7 +45,7 @@ Content-Type: application/json
 
 #Buscar Filmes Top-Rated
 GET http://localhost:3333/movies/top-rated
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjU4OTNiYWQ2MDBkOGYxNDEwOTQ1M2IiLCJpYXQiOjE3MTcyNzgyMzN9.Lo3NVbdfDeHUEfEjcavEypQcefH-cWHqXoEu7gWhqCs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjVjY2MwYTEyMmE1ZmY5YWMzNzFmM2EiLCJpYXQiOjE3MTczNTc2MTl9.UTZAMVUDhL1y003T2rUPXb8jT03xw0IiJn2e-4ed_OM
 
 ###
 
