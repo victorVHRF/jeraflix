@@ -59,7 +59,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjU4O
 POST http://localhost:3333/movies/watchlist
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjU4OTNiYWQ2MDBkOGYxNDEwOTQ1M2IiLCJpYXQiOjE3MTcyNzgyMzN9.Lo3NVbdfDeHUEfEjcavEypQcefH-cWHqXoEu7gWhqCs
-# watchlist retornando false
 
 {
   "profileId": "665893bad600d8f14109453b",
@@ -72,7 +71,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjU4O
 #Listar Filmes na Watchlist
 GET http://localhost:3333/movies/watchlist/665893bad600d8f14109453b
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjU4OTNiYWQ2MDBkOGYxNDEwOTQ1M2IiLCJpYXQiOjE3MTcyNzgyMzN9.Lo3NVbdfDeHUEfEjcavEypQcefH-cWHqXoEu7gWhqCs
-#vazio
 
 ###
 
