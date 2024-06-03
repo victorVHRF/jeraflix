@@ -1,4 +1,4 @@
-# Teste para a Jera - Desemvolvedor web
+# Teste para a Jera - Desenvolvedor web
 
 
 ## O projeto está dividido em api (backend) e app (frontend)
